@@ -1,0 +1,106 @@
+conky.config = {
+-- — Window specifications — #
+	own_window = true,
+	own_window_class = 'conky',
+	own_window_transparent = true,
+	own_window_type = 'override',
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_title = 'conky',
+	own_window_transparent = false,
+	own_window_argb_visual = true,
+	own_window_argb_value = 0,
+	background = false,
+	double_buffer = true,
+	no_buffers = true,
+	update_interval = 5,
+	total_run_times = 0,
+	net_avg_samples = 2,
+	override_utf8_locale = true,
+	xinerama_head = 0,
+	draw_shades = false,
+
+	text_buffer_size = 2048,
+	imlib_cache_size = 0,
+
+	border_inner_margin = 0,
+	border_outer_margin = 0,
+
+	minimum_width = 250, 
+	minimum_height = 600,
+
+
+	alignment = 'middle_right',
+	gap_x = 20,
+	gap_y = 0,
+
+
+-- — Graphics settings — #
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+-- — Text settings — #
+	use_xft = true,
+	font = "SF Mono:size=10",
+	xftalpha = 0.8,
+
+	default_color = '#FFFFFF',
+	default_gauge_width = 47, default_gauge_height = 25,
+	default_graph_width = 47, default_graph_height = 25,
+	default_bar_width = 253, default_bar_height = 5,
+
+	uppercase = false,
+	use_spacer = 'right',
+
+	color0 = 'white',
+	color1 = 'orange',
+	color2 = 'green',
+};
+
+conky.text = [[
+${voffset -40}
+
+${voffset 0}
+${image /home/maulana/.conky/manjaro.png -p 5,5 -s 100x100}${goto 110}${exec lsb_release -a | grep Descr | sed "s/^.*\:\s//"}
+${voffset 0}
+${goto 110}${exec uname -r}
+${voffset 0}
+${goto 110}${execi 60 uptime | sed "s/\,.*//" | awk '{ sub(/^[ \t]+/, ""); print }'}
+${voffset -20}
+${hr 2}
+${image /home/maulana/.conky/logo.jpg -p 10,135 -s 80x80}
+${voffset -30}
+${goto 100}${exec cat /proc/cpuinfo | grep name | tail -n 1 | sed "s/^model.*\:\s//" | sed "s/\sRadeon.*\,\s*.*$//"}
+${voffset -20}
+${goto 100}\#0: ${cpu cpu1} ${alignr 5}${cpubar cpu1 10,90}
+${voffset -20}
+${goto 100}\#1: ${cpu cpu2} ${alignr 5}${cpubar cpu2 10,90}
+${voffset -20}
+${goto 100}\#2: ${cpu cpu3} ${alignr 5}${cpubar cpu3 10,90}
+${voffset -20}
+${goto 100}\#3: ${cpu cpu4} ${alignr 5}${cpubar cpu4 10,90}
+${voffset -15}
+${hr 2}
+${goto 10}RAM : ${alignr 5}${mem} of ${memmax}
+${goto 10}${membar 10,240}
+${goto 10}SWP : ${alignr 5}${swap} of ${swapmax}
+${goto 10}${swapbar 10,240}
+${goto 10}TMP : ${alignr 5}${execi 1 bash /home/maulana/.conky/check_tmp.sh}
+${goto 10}${execbar 10,240 bash /home/maulana/.conky/check_tmp_bar.sh }
+${voffset -15}
+${hr 2}
+${goto 10}${font NotoSansMono Nerd Font:size=10}${font SF Mono:size=10}Root : ${alignr 5}${fs_free /} of ${fs_size /}
+${goto 10}${font NotoSansMono Nerd Font:size=10}${font SF Mono:size=10}Home : ${alignr}${fs_free /home} of ${fs_size /home}
+${goto 10}${font NotoSansMono Nerd Font:size=10}${font SF Mono:size=10}Win10 : ${alignr 5}${fs_free /media/maulana/Windows} of ${fs_size /media/maulana/Windows}
+${goto 10}${font NotoSansMono Nerd Font:size=10}${font SF Mono:size=10}SDCard : ${alignr 5}${fs_free /media/maulana/SDCard} of ${fs_size /media/maulana/SDCard}
+${voffset -15}
+${hr 2}
+${goto 10}${font NotoSansMono Nerd Font:size=10}歷${font SF Mono:size=10}NAS : ${alignr 5}${execi 300 bash /home/maulana/.conky/check_nas.sh}
+${goto 10}${font NotoSansMono Nerd Font:size=10}歷${font SF Mono:size=10}pCloud : ${alignr 5}${execi 300 bash /home/maulana/.conky/check_pcloud.sh}
+${goto 10}${font NotoSansMono Nerd Font:size=10}歷${font SF Mono:size=10}Google : ${alignr 5}${execi 300 bash /home/maulana/.conky/check_google.sh}
+${goto 10}${font NotoSansMono Nerd Font:size=10}歷${font SF Mono:size=10}USM : ${alignr 5}${execi 300 bash /home/maulana/.conky/check_usm.sh}
+${voffset -15}
+${hr 2}
+${goto 10}${font NotoSansMono Nerd Font:size=10}${font SF Mono:size=10}TransIT : ${alignr 5}${execi 300 bash /home/maulana/.conky/check_article.sh} folders
+]];

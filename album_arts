@@ -1,0 +1,72 @@
+conky.config = {
+-- — Window specifications — #
+	own_window = true,
+	own_window_class = 'Conky',
+	own_window_transparent = true,
+	own_window_type = 'override',
+	own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager',
+	own_window_title = 'conky',
+	own_window_transparent = 'false',
+	own_window_argb_visual = true,
+	own_window_argb_value = 100,
+	background = false,
+	double_buffer = true,
+	no_buffers = true,
+	update_interval = 3,
+	total_run_times = 0,
+	net_avg_samples = 2,
+	override_utf8_locale = true,
+	xinerama_head = 0,
+
+	text_buffer_size = 2048,
+	imlib_cache_size = 0,
+
+	border_inner_margin = 0,
+	border_outer_margin = 0,
+
+	minimum_width = 330, 
+	minimum_height = 330,
+
+
+	alignment = 'bottom_right',
+	gap_x = 20,
+	gap_y = 105,
+
+
+-- — Graphics settings — #
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+-- — Text settings — #
+	use_xft = true,
+	font = "IPAGothic,IPAゴシック:size=10",
+	xftalpha = 0.8,
+
+	default_color = '#FFFFFF',
+	default_gauge_width = 47, default_gauge_height = 25,
+	default_graph_width = 47, default_graph_height = 25,
+	default_bar_width = 253, default_bar_height = 5,
+
+	uppercase = false,
+	use_spacer = 'right',
+
+	color0 = 'white',
+	color1 = 'orange',
+	color2 = 'green',
+	mpd_password = 'password',
+	mpd_host = 'localhost',
+
+};
+
+conky.text = [[
+#${alignr}${image /home/maulana/.conky/vindauga_bg.png -p -10,-10 -s 350x350}
+${if_mpd_playing}
+${execi 3 zsh /home/maulana/.conky/art_fetch.sh}
+${image /tmp/cover.png -p 10,10 -s 310x310 -f 3}
+${endif}
+${if_match "${mpd_status}"=="Stopped"}
+${image /home/maulana/Downloads/empty.jpg -p 10,10 -s 310x310}
+${endif}
+]];
